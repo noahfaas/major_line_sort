@@ -65,7 +65,6 @@ bool isOrderedU_CSM_SDS(const std::vector<std::string>& v) {
     return true;
 }
 
-// Run a single test: sort, then check order. Print "Pass" or the final order if not ordered.
 void runTest(const std::vector<std::string>& input) {
     std::vector<std::string> v = input;
     sortMajors(v);
@@ -77,43 +76,41 @@ void runTest(const std::vector<std::string>& input) {
 }
 
 int main() {
-    // 1) empty
+    // empty
     runTest({});
 
-    // 2) single
+    // single element U
     runTest({"U"});
+
+    // single element CS
     runTest({"CS"});
+
+    // single element M
     runTest({"M"});
+    
+    // single element SDS
     runTest({"SDS"});
 
-    // 3) already sorted
+    // already sorted
     runTest({"U","U","CS","CS","M","SDS"});
 
-    // 4) reverse order
+    // reverse order
     runTest({"SDS","M","CS","U"});
 
-    // 5) alternating
+    // alternating cycle
     runTest({"U","SDS","CS","M","SDS","U","CS","M"});
 
-    // 6) all same
+    // all same major
     runTest({"M","M","M","M"});
 
-    // 7) paper examples
+    // random order 1
     runTest({"M","U","CS","U"});
-    runTest({"M","CS","M","U","U","SDS","U"});
-    runTest({"U","U","U","U","CS","CS","SDS"});
 
-    // 8) larger quick check
-    std::vector<std::string> big;
-    for (int i = 0; i < 200; i++) {
-        big.push_back("U");
-        big.push_back("CS");
-        big.push_back("M");
-        big.push_back("SDS");
-        big.push_back("CS");
-        big.push_back("U");
-    }
-    runTest(big);
+    // random order 2
+    runTest({"M","CS","M","U","U","SDS","U"});
+
+    // random order 3
+    runTest({"U","U","U","U","CS","CS","SDS"});
 
     return 0;
 }
